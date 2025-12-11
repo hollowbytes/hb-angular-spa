@@ -2,10 +2,11 @@ name: Test and scan repository
 
 on:
   workflow_dispatch:
-  pull_request:
   push:
     branches:
       - main
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   test-and-scan:
@@ -16,6 +17,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -26,9 +29,9 @@ jobs:
         run: npm install
 
       - name: Run tests
-        run: npm run test --watch=false --coverage --coverage-reporters=lcov
+        run: npm run test -- --watch=false --coverage --coverage-reporters=lcov
 
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v6
+        uses: SonarSource/sonarqube-scan-action@v7
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
