@@ -9,6 +9,4 @@ on:
 jobs:
   build-and-publish:
     uses: hollowbytes/hb-shared-workflows/.github/workflows/ci-docker-build.yml@main
-    secrets:
-      GITHUB_TOKEN: ${{ Secrets.GITHUB_TOKEN }}
       
