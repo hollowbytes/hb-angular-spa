@@ -14,6 +14,7 @@ jobs:
       matrix:
         node-version: [ '24' ]
     uses: hollowbytes/hb-shared-workflows/.github/workflows/ci-node-test.yml@main
+    secrets:
+      SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
     with:
       node-version: ${{ matrix.dotnet-version }}
-    secrets: inherit
