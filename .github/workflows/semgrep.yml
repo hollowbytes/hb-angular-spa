@@ -40,6 +40,13 @@ jobs:
       - name: Run Semgrep
         run: semgrep scan --config=r/all --sarif > semgrep.sarif
 
+      - name: Replace text in a file using sed
+        run: |
+          sed -i 's/"Critical"/"9.0"/g' semgrep.sarif
+          sed -i 's/"High"/"7.0"/g' semgrep.sarif
+          sed -i 's/"Medium"/"4.0"/g' semgrep.sarif
+          sed -i 's/"Low"/"1.0"/g' semgrep.sarif
+          
       # Upload the results to Github Code Scannning 
       - name: Upload SARIF file for GitHub Advanced Security Dashboard
         uses: github/codeql-action/upload-sarif@v4
@@ -53,4 +60,5 @@ jobs:
           name: semgrep.sarif
           path: semgrep.sarif
         if: always()
+
 
