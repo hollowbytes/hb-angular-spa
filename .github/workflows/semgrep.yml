@@ -43,9 +43,12 @@ jobs:
       - name: Replace text in a file using sed
         run: |
           sed -i 's/"Critical"\|"CRITICAL"/"9.0"/g' semgrep.sarif
-          sed -i 's/"High"\|"HIGH"/"7.0"/g' semgrep.sarif
-          sed -i 's/"Medium"\|"MEDIUM"/"4.0"/g' semgrep.sarif
+          sed -i 's/"High"\|"HIGH"/"8.0"/g' semgrep.sarif
+          sed -i 's/"Error"\|"ERROR"/"7.0"/g' semgrep.sarif
+          sed -i 's/"Medium"\|"MEDIUM"/"5.0"/g' semgrep.sarif
+          sed -i 's/"Warning"\|"WARNING"/"4.0"/g' semgrep.sarif
           sed -i 's/"Low"\|"LOW"/"1.0"/g' semgrep.sarif
+          sed -i 's/"Info"\|"INFO"/"0.1"/g' semgrep.sarif
           
       # Upload the results to Github Code Scannning 
       - name: Upload SARIF file for GitHub Advanced Security Dashboard
@@ -60,6 +63,7 @@ jobs:
           name: semgrep.sarif
           path: semgrep.sarif
         if: always()
+
 
 
 
